@@ -35,7 +35,7 @@ def calculate_schedule(dob):
         elif unit == "years":
             due_date = dob + relativedelta(years=interval)
         status = "Upcoming" if due_date > today else "Done"
-        result.append({"vaccine": vaccine, "date": due_date.strftime('%Y-%m-%d'), "status": status})
+        result.append({"vaccine": vaccine, "date": due_date.strftime('%d-%b-%Y'), "status": status})
     return result
 
 @app.route('/', methods=['GET', 'POST'])
@@ -68,4 +68,4 @@ def download():
         return "Invalid Date Format", 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

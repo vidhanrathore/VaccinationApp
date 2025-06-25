@@ -18,6 +18,12 @@ This is a simple web app built using **Flask**, **HTML**, **CSS**, and **Bootstr
 
 ## 📦 How to Run the App
 
+
 ### 1. Clone or unzip the folder
 ```bash
 cd vaccination_app
+pip freeze > requirements.txt
+```
+
+## Future Update
+-- 1. Take name as well as input and save as pdf as well as excel with name.pdf and name and dob inside the pdf.
