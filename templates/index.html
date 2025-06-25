@@ -1,0 +1,54 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Child Vaccination Scheduler</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="mb-4">Vaccination Schedule for Children</h2>
+
+        <form method="post" class="mb-4">
+            <div class="mb-3">
+                <label for="dob" class="form-label">Enter Date of Birth:</label>
+                <input type="date" name="dob" id="dob" value="{{ dob }}" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Check Schedule</button>
+        </form>
+
+        {% if schedule %}
+            <form action="/download" method="post" class="mb-3">
+                <input type="hidden" name="dob" value="{{ dob }}">
+                <button type="submit" class="btn btn-success">Download Schedule as CSV</button>
+            </form>
+
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Vaccine</th>
+                        <th>Scheduled Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in schedule %}
+                        <tr>
+                            <td>{{ item.vaccine }}</td>
+                            <td>{{ item.date }}</td>
+                            <td>
+                                {% if item.status == 'Upcoming' %}
+                                    <span class="badge bg-warning text-dark">Upcoming</span>
+                                {% else %}
+                                    <span class="badge bg-success">Done</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>
